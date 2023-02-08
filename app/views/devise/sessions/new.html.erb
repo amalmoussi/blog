@@ -1,0 +1,53 @@
+
+  <div class="bg-auto bg-center h-full relative" style="background-image: url('https://voyage-onirique.com/wp-content/uploads/2020/04/backiee-132803-landscape.jpg');">
+    <div class="flex">
+      <div class="flex-none">
+        <h2 class="text-amber-500 text-4xl font-['Arial'] pl-3 float-left">MyWebSite</h2>
+      </div> 
+      <div class="flex-1 w-64 pl-96">
+        <ul class="text-white flex">
+        <li class="p-2"><%= link_to "HOME"%></li>
+        <li class="p-2"><%= link_to "ABOUT"%></li>
+        <li class="p-2"><%= link_to "SERVICE"%></li>
+        <li class="p-2"><%= link_to "CONTACT"%></li>
+        </ul>
+      </div>
+      <div class="flex-1 w-32 pl-96">
+        <input class="srch border-orange-300" type="search" name="" placeholder="Type of text">
+        <button class="bg-orange-500 text-white rounded-lg p-0.5"><%= link_to "Search"%></button>
+      </div>
+    </div>
+    <div class="text-white text-6xl font-['Menlo'] absolute bottom-96 inset-x-24 p-6">
+    <p><i>Welcome !</p>
+    </div>
+    <div class="absolute text-white bottom-96 inset-x-28 ">
+    <p>Hi this is my web site ....</p>
+    </div>
+    <div class="absolute w-96 h-96 bg-zinc-900 h-full text-center text-white right-40 bottom-60 rounded-lg"> 
+        <div class="bg-orange-500 rounded-lg m-1"><h2 class="text-5xl p-10"> <i>Log in </i></h2></div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Log in" %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+      
+    </div>
+  </div> 
