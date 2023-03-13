@@ -1,29 +1,63 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="bg-auto bg-center h-full relative opacity-100" style="background-image: url('https://skyengine.ai/se/images/blog/LightingTypes.gif');">  
+   <div class="flex">
+    <div class="flex-none bg-black flex items-center">
+      <img src="https://www.leanios.com/assets/logo-566e5ecbf8ba49eb923491496c4190c7f541028498ffe07670c268ed018889b9.png" alt="Logo" class="h-8 w-auto mr-2">
+      <span class="text-white font-bold text-lg">Leanios</span>
+    </div>
+    <div class="flex-1 w-64 pl-96 bg-black">
+      <ul class="text-white flex">
+        <li class="p-2 flex items-center"><i class="material-icons">home</i><%= link_to "HOME"%></li>
+        <li class="p-2 flex items-center"><i class="material-icons">info</i><%= link_to "ABOUT"%></li>
+        <li class="p-2 flex items-center"><i class="material-icons">build</i><%= link_to "SERVICE"%></li>
+        <li class="p-2 flex items-center"><i class="material-icons">email</i> <%= link_to "CONTACT"%></li>
+      </ul>
+    </div>
+    <div class="flex-1 w-32 pl-96 bg-black">
+      <input class="srch border-orange-300" type="search" name="" placeholder="Type of text">
+      <button class="bg-white text-white rounded-lg p-0.5"><%= link_to "Search"%></button>
+    </div>
   </div>
+ 
+  <div class="flex items-center h-screen ml-64 absolute">  
+    <div class="mx-auto">
+      <h2 class="text-xl font-bold mb-4 text-white">Sign up</h2>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full max-w-sm" }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="mb-4">
+          <%= f.label :email, class: "block text-white font-bold mb-2" %>
+          <%= f.email_field :email, class: "shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline", autofocus: true, autocomplete: "email" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div class="mb-4">
+          <%= f.label :password, class: "block text-white font-bold mb-2" %>
+          <% if @minimum_password_length %>
+            <span class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</span>
+          <% end %>
+          <%= f.password_field :password, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", autocomplete: "new-password" %>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <div class="mb-4">
+          <%= f.label :password_confirmation, class: "block text-white font-bold mb-2" %>
+          <%= f.password_field :password_confirmation, class: "shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline", autocomplete: "new-password" %>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input type="checkbox" id="user_terms" name="user[terms]" class="form-checkbox h-4 w-4 text-white transition duration-150 ease-in-out">
+            <label for="user_terms" class="ml-2 block text-sm leading-5 text-white">
+              I agree to the <a href="#" class="font-bold underline text-white">Terms of Service</a>
+            </label>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <%= f.submit "Sign up", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>  
+</div>  

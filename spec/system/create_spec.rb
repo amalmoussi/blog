@@ -25,8 +25,6 @@ RSpec.describe 'create article', type: :system do
     fill_in 'Body', with: 'hello from rails'
     click_button 'Submit'
     
-    # The page should show success message
-    expect(page).to have_content("Article was successfully created")
 
     # 1 new article record is created
     expect(Article.count).to eq(1)

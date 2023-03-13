@@ -1,16 +1,44 @@
-<h2>Forgot your password?</h2>
+<!-- Change Password Form -->
+<div class="w-full max-w-md mx-auto">
+  <h2 class="text-xl font-bold mb-4">Change your password</h2>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="mb-4">
+      <%= f.label :password, "New Password", class: "block text-gray-700 font-bold mb-2" %>
+      <% if @minimum_password_length %>
+        <small class="text-gray-500">(<%= @minimum_password_length %> characters minimum)</small>
+      <% end %>
+      <%= f.password_field :password, class: "form-input mt-1 block w-full", autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :password_confirmation, "Confirm New Password", class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.password_field :password_confirmation, class: "form-input mt-1 block w-full", autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+    <div class="flex items-center justify-between">
+      <%= f.submit "Change my password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>
 
-<%= render "devise/shared/links" %>
+<!-- Forgot Password Form -->
+<div class="w-full max-w-md mx-auto">
+  <h2 class="text-xl font-bold mb-4">Forgot your password?</h2>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.email_field :email, class: "form-input mt-1 block w-full", autocomplete: "email" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= f.submit "Send me reset password instructions", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>

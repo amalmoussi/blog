@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!
 
   def index
     @articles = Article.all
@@ -13,9 +12,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
+
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: "Article was successfully created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,9 +26,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
-      redirect_to @article
+      redirect_to @article, notice: "Article was successfully updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,7 +43,13 @@ class ArticlesController < ApplicationController
   
   private
   def article_params
-    params.require(:article).permit(:title, :body, :image, :status)
+    params.require(:article).permit(:title, :body, :image, :user_id, :status, )
+  end
+
+  def authenticate_user
+    # Skip authentication for the index action
+    return if action_name == 'index'
+    super
   end
 end
 

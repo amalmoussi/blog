@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'update article', type: :system do
+  before do
+    login_as(FactoryBot.create(:user))
+  end
   # this will create a 'article' method, before each scenario is ran
   let!(:article) { Article.create(body: 'hello from rails', title: 'Ruby Yagi') }
 
@@ -8,12 +11,12 @@ RSpec.describe 'update article', type: :system do
     visit article_body
   
     # click the link that has the text 'Edit'
-    click_link 'Edit'
+    click_button 'Edit'
     
     fill_in 'Title', with: ''
     fill_in 'Body', with: ''
     
-    click_button 'Update Article'
+    click_button 'Submit'
 
     # The page should show error message 'Title can't be blank'
     expect(page).to have_content("Title can't be blank")
@@ -29,7 +32,7 @@ RSpec.describe 'update article', type: :system do
     fill_in 'Title', with: 'Fluffy'
     fill_in 'Body', with: 'hello from rails2'
 
-    click_button 'Update Article'
+    click_button 'Submit'
 
     # The page should show success message
     expect(page).to have_content("Article was successfully updated")
